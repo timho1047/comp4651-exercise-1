@@ -14,26 +14,26 @@ This exercise repo is generated using [Apache Maven][Maven], a software project 
 
 To try out the sample code, let's `cd` into the `exercise-1` folder under which `pom.xml` is located. You can now build the Maven project and package it to a jar file with the following command:
 ```
-$ mvn clean package --settings settings.xml
+mvn clean package --settings settings.xml
 ```
 Once the build succeeds, you should be able to run the two samples. Let's first copy a local file to HDFS:
 ```
-$ hadoop jar target/assignment-2-1.0-SNAPSHOT.jar hk.ust.comp4651.CopyLocalFile hkust.txt hkust.txt
+hadoop jar target/assignment-1-1.0-SNAPSHOT.jar hk.ust.comp4651.CopyLocalFile hkust.txt hkust.txt
 ```
 You will find a copy of `hkust.txt` file in HDFS:
 ```
-$ hadoop fs -ls
+hadoop fs -ls
 ```
 You can now print out the contents of this file in HDFS:
 ```
-$ hadoop jar target/assignment-2-1.0-SNAPSHOT.jar hk.ust.comp4651.FileSystemCat hkust.txt
+hadoop jar target/assignment-1-1.0-SNAPSHOT.jar hk.ust.comp4651.FileSystemCat hkust.txt
 ```
 The output should match the local copy: `cat hkust.txt`.
 
 Now it's time to examine the two example code in details and complete your `CopyFile.java`. After you are done, you can build the Maven project with `mvn clean package` and do some tests. For example, you can copy back `hkust.txt` from HDFS to the local disk:
 ```
-$ export LOCAL_DIR=file:///`pwd`
-$ hadoop jar target/assignment-2-1.0-SNAPSHOT.jar hk.ust.comp4651.CopyFile hkust.txt $LOCAL_DIR/cp-hkust.txt
+export LOCAL_DIR=file:///`pwd`
+hadoop jar target/assignment-2-1.0-SNAPSHOT.jar hk.ust.comp4651.CopyFile hkust.txt $LOCAL_DIR/cp-hkust.txt
 ```
 > In [QuickStarts VM][QuickStarts], the default filesystem is HDFS. If your want to refer to a local filesystem, you need to specify a prefix `file:///` before a file path.
 
@@ -44,20 +44,20 @@ If your implementation is correct, you will find a `cp-hkust.txt` file in your c
 
 To self-test your code, you need to build your Maven artifact:
 ```
-$ mvn clean package --settings settings.xml
+mvn clean package --settings settings.xml
 ```
 You can then generate a random dummy file, say 100 MB, and calculate its md5sum:
 ```
-$ head -c 100M < /dev/urandom > dummy
-$ md5sum dummy > md5.txt
+head -c 100M < /dev/urandom > dummy
+md5sum dummy > md5.txt
 ```
 You shall then move the dummy file to HDFS and copy it back using your code:
 ```
-$ hadoop jar target/assignment-2-1.0-SNAPSHOT.jar hk.ust.comp4651.CopyFile dummy $LOCAL_DIR/dummy
+hadoop jar target/assignment-2-1.0-SNAPSHOT.jar hk.ust.comp4651.CopyFile dummy $LOCAL_DIR/dummy
 ```
 Finally, you could calculate the md5sum of the file and check if it matches that of the original copy:
 ```
-$ md5sum -c md5.txt
+md5sum -c md5.txt
 ```
 
 [QuickStarts]: https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
