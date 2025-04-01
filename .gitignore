@@ -1,0 +1,6 @@
+target/
+.vscode/
+dummy
+md5.txt
+cp-hkust.txt
+*.crc

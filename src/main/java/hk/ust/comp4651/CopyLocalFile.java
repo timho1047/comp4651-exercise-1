@@ -69,7 +69,9 @@ public class CopyLocalFile {
 		/*
 		 * Automatically close the stream after the write finishes.
 		 */
-		IOUtils.copyBytes(in, out, BufferSize, true);
+        IOUtils.copyBytes(in, out, BufferSize, true);
+        
+        System.out.println();
 
 	}
 
